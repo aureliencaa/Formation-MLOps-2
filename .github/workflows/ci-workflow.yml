@@ -24,6 +24,6 @@ jobs:
       - name: Run Vulture
         run:  vulture formation_indus_ds_avancee scripts --min-confidence 100
       - name: Run tests
-        run:  "Trainee should add command to run test"
+        run:  pytest ./tests/test_unit/test_feature_engineering.py
 
 
