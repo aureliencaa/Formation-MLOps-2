@@ -22,12 +22,17 @@ def predict():
                                  training_mode=False)
         return features_path
 
+    @task
+    def predict_with_io(feature_path: str) -> None:
+        predict_with_io(features_path=feature_path, model_registry_folder=MODEL_REGISTRY_FOLDER)
+
+
     # Start completing predict task
-    # predict = PythonOperator()
+    predict = PythonOperator()
     # End completing predict task
 
-    # feature_path = prepare_features_with_io_task()
-    # predict_with_io_task(feature_path=feature_path)
+    feature_path = prepare_features_with_io_task()
+    predict_with_io_task(feature_path=feature_path)
 
 
 predict_dag = predict()
