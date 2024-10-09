@@ -3,6 +3,8 @@ import os
 import pandas as pd
 from sqlalchemy import create_engine
 
+from config import MONITORING_TABLE_NAME
+
 
 def monitor_with_io(predictions_folder: str, db_con_str: str, monitoring_table_name: str) -> None:
     latest_predictions_path = os.path.join(predictions_folder, 'latest.csv')
@@ -21,6 +23,5 @@ def monitor_with_io(predictions_folder: str, db_con_str: str, monitoring_table_n
 
 def monitor(latest_predictions: pd.DataFrame) -> pd.DataFrame:
     # Start filling function
-    monitoring_df = pd.DataFrame
-    # End filling function
-    return monitoring_df
+    monitoring_df = latest_predictions.groupby('predictions_time').agg({'predictions': 'mean'}).reset_index()
+    return (monitoring_df)
